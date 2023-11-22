@@ -1,5 +1,5 @@
 #!/usr/bin/python
-""" This is a Review class for HBNB project"""
+""" This is a class using DBStorage - Review"""
 import models
 from os import getenv
 from models.base_model import BaseModel, Base

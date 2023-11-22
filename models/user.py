@@ -1,5 +1,5 @@
-#!/usr/bin/python3
-""" This module contains a class User"""
+#!/usr/bin/python
+""" This is a class using DBStorage - User"""
 import models
 from models.base_model import BaseModel, Base
 from os import getenv
