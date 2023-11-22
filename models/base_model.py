@@ -3,13 +3,26 @@
 import uuid
 from datetime import datetime
 import models
+from os import getenv
+import sqlalchemy
+from sqlalchemy import Column, String, DateTime
+from sqlalchemy.ext.declarative import declarative_base
 
 fdate = '%Y-%m-%dT%H:%M:%S.%f'
-Base = object
+if models.storage_t != "db":
+    Base = object
+else:
+    Base = declarative_base()
 
 
 class BaseModel:
-    """A base class for all hbnb models"""
+    """A base class for all hbnb models
+    changed storage engine and use SQLAlchemy """
+    if models.storage_t == "db":
+        id = Column(String(60), primary_key=True)
+        created_at = Column(DateTime, default=datetime.utcnow)
+        updated_at = Column(DateTime, default=datetime.utcnow)
+
     def __init__(self, *args, **kwargs):
         """Instatntiates a new model"""
 
@@ -37,19 +50,20 @@ class BaseModel:
                 self.id = str(uuid.uuid4())
 
     def __str__(self):
-        """Returns a string representation of the instance"""
+        """Returns a string representation of the instance class"""
         cls = (str(type(self)).split('.')[-1]).split('\'')[0]
         return '[{}] ({}) {}'.format(cls, self.id, self.__dict__)
 
     def save(self):
-        """Updates updated_at with current time when instance is changed"""
-        from models import storage
-        self.updated_at = datetime.now()
-        storage.save()
+        """Updates with current time when instance updated_at is changed"""
+
+        self.updated_at = datetime.utcnow()
+        models.storage.new(self)
+        models.storage.save()
 
     def to_dict(self):
         """
-        Return dictionary of BaseModel with string formats of times
+        a dictionary of BaseModel with string formats of timedate
         """
         new_dict = self.__dict__.copy()
         if "created_at" in new_dict:
@@ -60,3 +74,8 @@ class BaseModel:
         if "_sa_instance_state" in new_dict:
             del new_dict["_sa_instance_state"]
         return new_dict
+
+    def delete(self):
+        """to delete the current instance from the storage"""
+
+        models.storage.delete(self)
