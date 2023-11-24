@@ -110,26 +110,26 @@ class HBNBCommand(cmd.Cmd):
         pass
 
     def _key_value_parser(self, args):
-            """It creates a dictionary from a list of strings"""
+        """It creates a dictionary from a list of strings"""
 
-            new_dict = {}
-            for arg in args:
-                if "=" in arg:
-                    kvp = arg.split('=', 1)
-                    key = kvp[0]
-                    value = kvp[1]
-                    if value[0] == value[-1] == '"':
-                        value = split(value)[0].replace('_', ' ')
-                    else:
+        new_dict = {}
+        for arg in args:
+            if "=" in arg:
+                kvp = arg.split('=', 1)
+                key = kvp[0]
+                value = kvp[1]
+                if value[0] == value[-1] == '"':
+                    value = split(value)[0].replace('_', ' ')
+                else:
+                    try:
+                        value = int(value)
+                    except (SyntaxError, NameError):
                         try:
-                            value = int(value)
-                        except:
-                            try:
-                                value = float(value)
-                            except:
-                                continue
-                    new_dict[key] = value
-            return new_dict
+                            value = float(value)
+                        except (SyntaxError, NameError):
+                            continue
+                new_dict[key] = value
+        return new_dict
 
     def do_create(self, args):
         """
