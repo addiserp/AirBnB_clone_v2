@@ -11,9 +11,9 @@ from fabric.api import local
 
 
 def do_pack():
-    """It generates a tgz archive"""
+    """to generate a tgz archive"""
     try:
-        """Creates archive from web_static directory"""
+        """to Create archive from web_static directory"""
         local("mkdir -p versions")
         file = 'versions/web_static_{}.tgz'\
             .format(datetime.strftime(datetime.now(), "%Y%m%d%I%M%S"))
