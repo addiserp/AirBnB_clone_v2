@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-#a script that starts a Flask web application:
+# a script that starts a Flask web application:
 
 from flask import Flask
 
@@ -8,8 +8,10 @@ app = Flask(__name__)
 
 @app.route('/python/', strict_slashes=False)
 @app.route('/python/<text>', strict_slashes=False)
-def pythoniscool(text = "is cool"):
-    """this will display “Python ” and followed by the value of input variable"""
+def pythoniscool(text="is cool"):
+    """
+        this will display “Python ” and followed by the value of input variable
+    """
     return 'Python ' + text.replace('_', ' ')
 
 
