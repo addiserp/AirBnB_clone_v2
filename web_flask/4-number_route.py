@@ -6,11 +6,10 @@ from flask import Flask
 app = Flask(__name__)
 
 
-@app.route('/number/<n>', strict_slashes=False)
+@app.route('/number/<int:n>', strict_slashes=False)
 def isinteger(n):
-    """this will display “n is number ” only if n is an integer"""
-    if (type(n) is int):
-        return 'n is number'
+    """this will display “n is a number ” only if n is an integer"""
+    return "{} is a number".format(n)
 
 
 @app.route('/python/', strict_slashes=False)
