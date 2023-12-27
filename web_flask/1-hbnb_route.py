@@ -8,8 +8,10 @@ app = Flask(__name__)
 
 
 @app.route('/hbnb', strict_slashes=False)
-def hello_HBNB():
-    """this will return HBNB!"""
+def index():
+    """
+        this will return HBNB!
+    """
     return 'HBNB!'
 
 if __name__ == '__main__':
