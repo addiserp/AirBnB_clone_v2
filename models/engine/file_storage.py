@@ -46,7 +46,7 @@ class FileStorage:
 
     def close(self):
         "calles Reload function"
-        self.__session.reload()
+        self.reload()
 
     def reload(self):
         """Loads storage dictionary from file"""
@@ -67,3 +67,4 @@ class FileStorage:
             key = obj.__class__.__name__ + '.' + obj.id
             if key in self.__objects:
                 del self.__objects[key]
+                

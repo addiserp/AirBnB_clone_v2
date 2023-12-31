@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-initialize the models Storage Type.
+initialize the models package DBStorage
 """
 
 from os import getenv
