@@ -13,8 +13,9 @@ app = Flask("__name__")
 
 
 @app.teardown_appcontext
-def refresh(exception):
-        models.storage.close()
+def teardown_db(exception):
+    """this will closes the storage on teardown"""
+    storage.close()
 
 
 @app.route('/states', strict_slashes=False)
