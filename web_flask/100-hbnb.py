@@ -12,15 +12,14 @@ import models
 app = Flask(__name__)
 
 
-@app.route('/hbnb_filters', strict_slashes=False)
-def hbnb_filters():
-    """It displays a HTML page states, cities and Amenity listed"""
+@app.route('/hbnb', strict_slashes=False)
+def hbnb():
+    """It displays a HTML page states, cities and Amenity and places listed"""
     states = sorted(list(storage.all("State").values()), key=lambda x: x.name)
     city = sorted(list(storage.all("cities").values()), key=lambda x: x.name)
-
     amenities = sorted(list(storage.all("Amenity").values()),
                        key=lambda x: x.name)
-    return render_template('10-hbnb_filters.html', states=states, city=city,
+    return render_template('100-hbnb.html', states=states, city=city,
                            amenities=amenities)
 
 
